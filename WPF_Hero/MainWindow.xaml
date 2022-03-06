@@ -1,0 +1,74 @@
+﻿<Window x:Class="WPF_Hero.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Hero"
+        xmlns:vms="clr-namespace:WPF_Hero.ViewModels"
+        xmlns:helpers="clr-namespace:WPF_Hero.Helpers"
+        mc:Ignorable="d"
+        Title="Hero Editor" Height="450" Width="800"
+        Closed="Window_Closed">
+    <Window.DataContext>
+        <vms:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <helpers:NumberToColorConverter x:Key="colorconverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Barrack}" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedFromBarrack}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="{Binding Name}" ></Label>
+                            <Label Content="{Binding Power}" Grid.Row="1" ContentStringFormat="Power: {0}"></Label>
+                            <Label Content="{Binding Speed}" Grid.Row="1" ContentStringFormat="Speed: {0}" Grid.Column="1"></Label>
+                            <Label Content="Side" Grid.Row="1" Grid.Column="2"></Label>
+                            <ProgressBar Minimum="0" Maximum="10" Value="{Binding Power}" Foreground="{Binding Power, Converter={StaticResource colorconverter}}" Grid.Row="2" Height="10" Margin="10" Padding="10"></ProgressBar>
+                            <ProgressBar Minimum="0" Maximum="10" Value="{Binding Speed}" Foreground="{Binding Speed, Converter={StaticResource colorconverter}}" Grid.Row="2" Grid.Column="1" Height="10" Margin="10" Padding="10"></ProgressBar>
+                            <Label Content="{Binding Side}" Grid.Row="2" Grid.Column="2"></Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1" >
+            <Label Content="{Binding AllCost}" ContentStringFormat="Money: {0}$" HorizontalContentAlignment="Center"></Label>
+            <Button Content="Add To Army" Command="{Binding AddToArmyCommand}" Margin="10" Padding="10"></Button>
+            <Button Content="Remove From Army" Command="{Binding RemoveFromArmyCommand}" Margin="10" Padding="10"></Button>
+            <Button Content="Create Hero" Command="{Binding CreateHeroCommand}" Margin="10" Padding="10"></Button>
+            <Label Content="{Binding AVGPower}" ContentStringFormat="AVGPower: {0}" HorizontalContentAlignment="Center"></Label>
+            <ProgressBar Minimum="0" Maximum="10" Value="{Binding AVGPower, Mode=OneWay}" Foreground="{Binding AVGPower, Mode=OneWay, Converter={StaticResource colorconverter}}" Padding="10" Margin="10" Height="20"></ProgressBar>
+            <Label Content="{Binding AVGSpeed}"  ContentStringFormat="AVGSpeed: {0}" HorizontalContentAlignment="Center"></Label>
+            <ProgressBar Minimum="0" Maximum="10" Value="{Binding AVGSpeed, Mode=OneWay}" Foreground="{Binding AVGSpeed, Mode=OneWay, Converter={StaticResource colorconverter}}" Padding="10" Margin="10" Height="20"></ProgressBar>
+        </StackPanel>
+        <ListBox Grid.Column="2" ItemsSource="{Binding Army}" FontSize="16" SelectedItem="{Binding SelectedFromArmy}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"></Label>
+                        <Label Content="{Binding Power}"  ContentStringFormat="[{0}]"></Label>
+                        <Label Content="{Binding Speed}"   ContentStringFormat="[{0}]"></Label>
+                        <Label Content="{Binding Side}" ContentStringFormat="[{0}]"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

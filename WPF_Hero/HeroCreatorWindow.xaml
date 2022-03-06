@@ -1,0 +1,24 @@
+﻿<Window x:Class="WPF_Hero.HeroCreatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Hero.Models"
+        mc:Ignorable="d"
+        Title="HeroCreatorWindow" Height="365" Width="295">
+    <StackPanel>
+        <Label Margin="10,0,10,0" Padding="10" Content="Name" Background="LightBlue"></Label>
+        <TextBox x:Name="name" Margin="10,0,10,0" Padding="10" ></TextBox>
+        <Label Margin="10,0,10,0" Padding="10" Content="Speed" Background="LightBlue"></Label>
+        <TextBox x:Name="speed" Margin="10,0,10,0" Padding="10" ></TextBox>
+        <Label Margin="10,0,10,0" Padding="10" Content="Power" Background="LightBlue"></Label>
+        <TextBox x:Name="power" Margin="10,0,10,0" Padding="10" ></TextBox>
+        <Label Margin="10,0,10,0" Padding="10" Content="Type" Background="LightBlue"></Label>
+        <ComboBox x:Name="side" SelectedIndex="0" Margin="10,0,10,0">
+            <ComboBoxItem>Good</ComboBoxItem>
+            <ComboBoxItem>Evil</ComboBoxItem>
+            <ComboBoxItem>Neutral</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Save" Margin="10" Padding="10" Click="Button_Click"></Button>
+    </StackPanel>
+</Window>
